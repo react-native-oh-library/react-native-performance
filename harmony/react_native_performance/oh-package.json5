@@ -1,0 +1,13 @@
+{
+  "name": "@react-native-oh-tpl/react-native-performance",
+  "version": "5.1.2-0.0.1",
+  "description": "Measure React Native performance",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache License 2.0",
+  "dependencies": {
+    "@rnoh/react-native-openharmony": 'file:../react_native_openharmony'
+  },
+  "repository": "git://github.com/react-native-oh-library/react-native-performance.git"
+}
+
