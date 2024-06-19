@@ -1,5 +1,5 @@
 import { createEventEmitter } from './event-emitter';
-import { createPerformanceObserver} from './performance-observer';
+import { createPerformanceObserver } from './performance-observer';
 import {
   EntryType,
   PerformanceMark,
@@ -245,7 +245,7 @@ export const createPerformance = (now: () => number = defaultNow) => {
   const PerformanceObserver = createPerformanceObserver({
     addEventListener,
     removeEventListener,
-    getEntriesByType
+    getEntriesByType,
   });
 
   return {
