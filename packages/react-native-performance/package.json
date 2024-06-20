@@ -1,14 +1,24 @@
 {
-  "name": "react-native-performance",
-  "version": "5.1.2",
+  "name": "@react-native-oh-tpl/react-native-performance",
+  "version": "5.1.2-0.0.1",
   "description": "Measure React Native performance",
   "homepage": "https://github.com/oblador/react-native-performance",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oblador/react-native-performance.git",
+    "url": "git://github.com/react-native-oh-library/react-native-performance.git",
     "directory": "packages/react-native-performance"
   },
-  "main": "lib/commonjs/index.js",
+  "harmony": {
+    "alias": "react-native-performance",
+    "codegenConfig": {
+      "specPaths": [
+        "./src"
+      ]
+    }
+  },
+  "main": "lib/commonjs/index",
+  "module": "lib/module/index",
+  "typings": "lib/typescript/index.d.ts",
   "types": "lib/typescript/index.d.ts",
   "react-native": "src/index.ts",
   "source": "src/index",
@@ -19,6 +29,7 @@
     "!**/__fixtures__",
     "!**/__mocks__",
     "android",
+    "harmony",
     "ios",
     "react-native-performance.*",
     "!.DS_Store",
@@ -26,18 +37,23 @@
     "!ios/build"
   ],
   "scripts": {
+    "blob": "bob build",
     "test": "jest",
-    "prepare": "bob build"
+    "prepare": "npm run blob"
   },
   "keywords": [
     "react-native",
     "performance",
     "perf",
-    "benchmark"
+    "benchmark",
+    "harmony"
   ],
   "author": "Joel Arvidsson",
   "license": "MIT",
   "peerDependencies": {
+    "react-native": "*"
+  },
+  "dependencies": {
     "react-native": "*"
   },
   "devDependencies": {
@@ -45,6 +61,7 @@
     "@babel/preset-env": "^7.20.0",
     "@babel/preset-typescript": "^7.20.0",
     "@types/jest": "^29.2.1",
+    "@types/react": "^18.3.3",
     "babel-jest": "^29.2.1",
     "jest": "^29.2.1",
     "react-native-builder-bob": "^0.21.2",
@@ -63,6 +80,7 @@
     "output": "lib",
     "targets": [
       "commonjs",
+      "module",
       [
         "typescript",
         {
@@ -70,5 +88,6 @@
         }
       ]
     ]
-  }
+  },
+  "gitHead": "c0d8d1a41311bfde7eafd4d9ff502b463732e510"
 }

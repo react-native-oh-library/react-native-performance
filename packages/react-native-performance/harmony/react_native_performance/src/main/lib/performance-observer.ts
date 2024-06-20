@@ -44,16 +44,30 @@ const sortByStartTime = (a, b) => a.startTime - b.startTime;
 const OBSERVER_TYPE_SINGLE = 'single';
 const OBSERVER_TYPE_MULTIPLE = 'multiple';
 
+////替代requestAnimationFrame实现优雅降级
+let lastTime=0;
+const substitutesRequestAnimationFrame = function( callback) {
+  let currTime = new Date().getTime();
+  //为了使setTimteout的尽可能的接近每秒60帧的效果
+  let timeToCall = Math.max( 0, 16 - ( currTime - lastTime ) );
+  let timeId = setTimeout( function() {
+    callback( currTime + timeToCall );
+  }, timeToCall );
+  lastTime = currTime + timeToCall;
+  return timeId;
+};
+//替代cancelAnimationFrame实现优雅降级
+const substitutesCancelAnimationFrame = function( id ) {
+  clearTimeout( id );
+};
+
 export const createPerformanceObserver = ({
   addEventListener,
   removeEventListener,
-  getEntriesByType
+  getEntriesByType,
 }) =>
   class PerformanceObserver {
-    callback: (
-      list: PerformanceObserverEntryList,
-      observer: PerformanceObserver
-    ) => void;
+    callback: (list: PerformanceObserverEntryList, observer: PerformanceObserver) => void;
     buffer: PerformanceEntry[];
     entryTypes: Set<EntryType>;
     timer?: number;
@@ -64,12 +78,7 @@ export const createPerformanceObserver = ({
 
     static supportedEntryTypes = SUPPORTED_ENTRY_TYPES;
 
-    constructor(
-      callback: (
-        list: PerformanceObserverEntryList,
-        observer: PerformanceObserver
-      ) => void
-    ) {
+    constructor(callback: (list: PerformanceObserverEntryList, observer: PerformanceObserver) => void) {
       this.callback = callback;
       this.buffer = [];
       this.timer = null;
@@ -78,13 +87,12 @@ export const createPerformanceObserver = ({
     }
 
     emitRecords = () => {
-      console.log("看看有没有来到这里this.emitRecords;",JSON.stringify(this.buffer))
       this.callback(new PerformanceObserverEntryList(this.takeRecords()), this);
     };
 
     scheduleEmission() {
       if (this.timer === null) {
-        this.timer = requestAnimationFrame(() => {
+        this.timer = substitutesRequestAnimationFrame(() => {
           this.timer = null;
           this.emitRecords();
         });
@@ -161,7 +169,7 @@ export const createPerformanceObserver = ({
       this.observerType = null;
       this.buffer = [];
       if (this.timer !== null) {
-        cancelAnimationFrame(this.timer);
+        substitutesCancelAnimationFrame(this.timer);
         this.timer = null;
       }
     }
@@ -169,7 +177,6 @@ export const createPerformanceObserver = ({
     takeRecords() {
       const entries = this.buffer.sort(sortByStartTime);
       this.buffer = [];
-      console.log("看看有没有来到这里takeRecords;",JSON.stringify(entries))
       return entries;
     }
   };

@@ -1,4 +1,3 @@
-import {TurboModuleRegistry,DeviceEventEmitter} from 'react-native';
 import { createPerformance } from './performance';
 import {
   PerformanceReactNativeMark,
@@ -8,22 +7,26 @@ import {
   installResourceLogger,
   uninstallResourceLogger,
 } from './resource-logger';
-import Performance from './NativePerformance';
 const { PerformanceObserver, addEntry, performance } = createPerformance();
 
+declare const global: { __turboModuleProxy: null | {} };
 
-const RNPerformanceManager =TurboModuleRegistry.get('PerformanceNativeModule')
-if (RNPerformanceManager) {
-  //测试这个DeviceEventEmitter是不是可以接收到消息
-  // console.log("看一看这个RNPerformanceManager数据是不是到啦")
-  DeviceEventEmitter.addListener('mark', (data) => {
-    // console.log("看一看这个DeviceEventEmitter数据是不是到啦",JSON.stringify(data))
+const isTurboModuleEnabled = global.__turboModuleProxy != null;
+
+const RNPerformanceManager = isTurboModuleEnabled
+  ? require('./NativeRNPerformanceManager').default
+  : NativeModules.RNPerformanceManager;
+
+if (Platform.OS === 'android' || RNPerformanceManager) {
+  const emitter = new NativeEventEmitter(RNPerformanceManager);
+
+  emitter.addListener('mark', (data) => {
     addEntry(
       new PerformanceReactNativeMark(data.name, data.startTime, data.detail)
     );
   });
 
-  DeviceEventEmitter.addListener('metric', (data) => {
+  emitter.addListener('metric', (data) => {
     addEntry(
       new PerformanceMetric(data.name, {
         startTime: data.startTime,
@@ -35,7 +38,6 @@ if (RNPerformanceManager) {
 }
 
 export default performance;
-
 
 export type Performance = typeof performance;
 
