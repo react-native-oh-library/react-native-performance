@@ -1,5 +1,6 @@
+@Entry
 @Component
-export struct MainPage {
+struct Index {
   @State message: string = 'Hello World';
 
   build() {
