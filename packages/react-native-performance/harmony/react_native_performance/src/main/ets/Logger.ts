@@ -6,7 +6,7 @@ class Logger {
   private format: string = '%{public}s, %{public}s';
   private isDebug: boolean;
 
-  constructor(prefix: string = 'MyApp', domain: number = 0xFF00, isDebug = false) {
+  constructor(prefix: string = 'RNPerformance', domain: number = 0xFF00, isDebug = false) {
     this.prefix = prefix;
     this.domain = domain;
     this.isDebug = isDebug;
@@ -31,4 +31,4 @@ class Logger {
   }
 }
 
-export default new Logger('ImageCropPickerTurboModule', 0xFF00, true)
+export default new Logger('RNPerformanceTurboModule', 0xFF00, true)

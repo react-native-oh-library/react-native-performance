@@ -2,7 +2,7 @@
   "module": {
     "name": "react_native_performance",
     "type": "har",
-    "description": "$string:module_desc",
+    "description": "",
     "deviceTypes": [
       "phone",
       "tablet",
