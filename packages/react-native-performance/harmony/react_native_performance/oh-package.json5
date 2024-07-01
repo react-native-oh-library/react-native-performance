@@ -1,6 +1,6 @@
 {
   "name": "@react-native-oh-tpl/react-native-performance",
-  "version": "5.1.2-0.0.1",
+  "version": "5.1.2-0.0.3",
   "description": "Measure React Native performance",
   "main": "Index.ets",
   "author": "",
