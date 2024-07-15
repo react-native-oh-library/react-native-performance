@@ -1,67 +1,19 @@
-# React Native Performance tooling
+# @react-native-oh-tpl/react-native-performance
 
-Toolchain to measure and monitor the performance of your React Native app in development, pipeline and in production.
+本项目基于 [react-native-performance](https://github.com/react-native-oh-library/react-native-performance)
 
-## Packages
+## 文档地址 / Documentation URL 
 
-### [`react-native-performance`](https://github.com/oblador/react-native-performance/blob/master/packages/react-native-performance/README.md)
+[中文 / Chinese](https://gitee.com/react-native-oh-library/usage-docs/blob/master/zh-cn/react-native-performance.md)
 
-An implementation of the [`Performance` API](https://developer.mozilla.org/en-US/docs/Web/API/Performance) for React Native.
+[英文 / English](https://gitee.com/react-native-oh-library/usage-docs/blob/master/zh-en/react-native-performance.md)
 
-- Integrates well with `React.Profiler` API
-- Trace arbitrary events in your app such as component render time
-- Capture network traffic
-- Collect native traces such as script execution and time to interactive of root view
-- Collect native metrics in development such as JS bundle size
+## Codegen
 
-### [`flipper-plugin-performance`](https://github.com/oblador/react-native-performance/blob/master/packages/flipper-plugin-performance/README.md)
+该库已接入 codegen，具体请查阅文档。
 
-Visualize performance tracing on a timeline and generic metrics in the debug tool Flipper.
+The library has been integrated with codegen. Please refer to the documentation for details.
 
-### [`react-native-performance-flipper-reporter`](https://github.com/oblador/react-native-performance/blob/master/packages/react-native-performance-flipper-reporter/README.md)
+## 请悉知 / Acknowledgements
 
-Connect the `react-native-performance` library with the `flipper-plugin-performance` visualization tool in development.
-
-### [`isomorphic-performance`](https://github.com/oblador/react-native-performance/blob/master/packages/isomorphic-performance/README.md)
-
-Isomorphic Performance API for Node, Browser & React Native. Useful if your app targets both web and native.
-
-## Demo
-
-See the projects in the [`examples`](https://github.com/oblador/flipper-plugin-react-native-performance/tree/master/examples) folder.
-
-## Development
-
-Make sure to have [`yarn`](https://classic.yarnpkg.com/lang/en/) v1 installed and run `yarn` in the root folder to install dependencies for all packages.
-
-Uninstall the Flipper Performance plugin if previously installed. Then edit your `~/.flipper/config.json` to look something like this:
-
-```
-{
-  "pluginPaths": ["/path/to/react-native-performance/packages"]
-}
-```
-
-Continously compile the plugin as you edit with:
-
-```bash
-yarn workspace flipper-plugin-performance run watch
-```
-
-Run the example app with:
-
-```bash
-cd examples/vanilla
-yarn start # important to run this before the next step!
-yarn ios # or yarn android
-```
-
-Run the unit tests with:
-
-```bash
-yarn test
-```
-
-## License
-
-MIT © Joel Arvidsson 2019 – present
+本项目基于 [The MIT License (MIT)](https://github.com/oblador/react-native-performance/blob/master/LICENSE) ，请自由地享受和参与开源。
