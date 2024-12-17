@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "react-native-performance",
+        "License": "MIT License",
+        "License File": "https://github.com/oblador/react-native-performance/blob/master/LICENSE",
+        "Version Number": "5.1.2",
+        "Owner" : "xiafeng@huawei.com",
+        "Upstream URL": "https://github.com/oblador/react-native-performance",
+        "Description": "native performance library for react-native"
+    }
+]
